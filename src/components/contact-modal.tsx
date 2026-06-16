@@ -8,26 +8,66 @@ type ContactModalProps = {
   className?: string;
 };
 
+type SubmitStatus = "idle" | "sending" | "sent" | "error";
+
 export default function ContactModal({
   label = "Contact Us",
   className = "rounded-full border border-slate-500 px-5 py-2 text-sm font-semibold transition hover:border-slate-300",
 }: ContactModalProps) {
   const [open, setOpen] = useState(false);
   const [submitted, setSubmitted] = useState(false);
+  const [status, setStatus] = useState<SubmitStatus>("idle");
+  const [errorMessage, setErrorMessage] = useState("");
 
   const handleOpen = () => {
     setSubmitted(false);
+    setStatus("idle");
+    setErrorMessage("");
     setOpen(true);
   };
 
   const handleClose = () => {
     setOpen(false);
     setSubmitted(false);
+    setStatus("idle");
+    setErrorMessage("");
   };
 
-  const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    setSubmitted(true);
+    setStatus("sending");
+    setErrorMessage("");
+
+    const form = event.currentTarget;
+    const formData = new FormData(form);
+    const payload = Object.fromEntries(formData.entries());
+
+    try {
+      const response = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ ...payload, source: "Contact modal" }),
+      });
+
+      const result = (await response.json().catch(() => ({}))) as {
+        message?: string;
+      };
+
+      if (!response.ok) {
+        throw new Error(result.message || "Message could not be sent.");
+      }
+
+      form.reset();
+      setSubmitted(true);
+      setStatus("sent");
+    } catch (error) {
+      setStatus("error");
+      setErrorMessage(
+        error instanceof Error
+          ? error.message
+          : "Message could not be sent. Please try again.",
+      );
+    }
   };
 
   const modal = open ? (
@@ -72,6 +112,17 @@ export default function ContactModal({
             </div>
           ) : (
             <form className="space-y-4" onSubmit={handleSubmit}>
+              <div className="hidden" aria-hidden="true">
+                <label htmlFor="modal-company">Company</label>
+                <input
+                  id="modal-company"
+                  name="company"
+                  type="text"
+                  tabIndex={-1}
+                  autoComplete="off"
+                />
+              </div>
+
               <div>
                 <label
                   htmlFor="modal-name"
@@ -140,11 +191,18 @@ export default function ContactModal({
                 />
               </div>
 
+              {status === "error" ? (
+                <p className="text-sm font-medium text-rose-300" role="alert">
+                  {errorMessage}
+                </p>
+              ) : null}
+
               <button
                 type="submit"
-                className="rounded-full bg-cyan-400 px-5 py-2.5 text-sm font-semibold text-slate-900 transition hover:bg-cyan-300"
+                disabled={status === "sending"}
+                className="rounded-full bg-cyan-400 px-5 py-2.5 text-sm font-semibold text-slate-900 transition hover:bg-cyan-300 disabled:cursor-not-allowed disabled:opacity-70"
               >
-                Send
+                {status === "sending" ? "Sending..." : "Send"}
               </button>
             </form>
           )}
