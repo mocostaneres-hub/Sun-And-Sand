@@ -1,11 +1,12 @@
 import Image from "next/image";
 import Link from "next/link";
+import FollowButton from "@/components/follow-button";
 
 export default function ContactPage() {
   return (
     <main className="min-h-screen bg-slate-950 text-slate-100">
       <section className="mx-auto max-w-7xl px-6 py-8 lg:px-8">
-        <nav className="flex items-center justify-between py-1">
+        <nav className="flex items-start justify-between gap-4 py-1">
           <div className="shrink-0">
             <Image
               src="/sun-and-sand-logo.png"
@@ -15,12 +16,15 @@ export default function ContactPage() {
               className="h-24 w-24 rounded-lg bg-white p-1.5"
             />
           </div>
-          <Link
-            href="/"
-            className="text-sm font-semibold text-cyan-300 transition hover:text-cyan-200"
-          >
-            Back to Home
-          </Link>
+          <div className="flex flex-wrap items-center justify-end gap-3 sm:gap-4">
+            <Link
+              href="/"
+              className="rounded-full border border-cyan-300/70 px-5 py-2.5 text-base font-semibold text-cyan-200 transition hover:border-cyan-200 hover:bg-cyan-300/10 hover:text-cyan-100 sm:px-6 sm:text-lg"
+            >
+              Back to Home
+            </Link>
+            <FollowButton className="inline-flex items-center justify-center rounded-full border border-[#1877f2]/80 bg-[#1877f2] px-5 py-2.5 text-base font-semibold text-white transition hover:border-[#4e9af7] hover:bg-[#0f66d6] sm:px-6 sm:text-lg" />
+          </div>
         </nav>
       </section>
 

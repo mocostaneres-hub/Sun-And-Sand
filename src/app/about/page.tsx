@@ -2,6 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import ContactModal from "@/components/contact-modal";
 import ListingCarousel from "@/components/listing-carousel";
+import FollowButton from "@/components/follow-button";
 
 type RedfinListing = {
   title: string;
@@ -69,7 +70,7 @@ export default function AboutPage() {
   return (
     <main className="min-h-screen bg-slate-950 text-slate-100">
       <section className="mx-auto max-w-7xl px-6 py-8 lg:px-8">
-        <nav className="flex items-center justify-between py-1">
+        <nav className="flex items-start justify-between gap-4 py-1">
           <div className="shrink-0">
             <Image
               src="/sun-and-sand-logo.png"
@@ -79,13 +80,14 @@ export default function AboutPage() {
               className="h-32 w-32 rounded-lg bg-white p-1.5"
             />
           </div>
-          <div className="flex items-center gap-3 sm:gap-4">
+          <div className="flex flex-wrap items-center justify-end gap-3 sm:gap-4">
             <Link
               href="/"
               className="rounded-full border border-cyan-300/70 px-5 py-2.5 text-base font-semibold text-cyan-200 transition hover:border-cyan-200 hover:bg-cyan-300/10 hover:text-cyan-100 sm:px-6 sm:text-lg"
             >
               Back to Home
             </Link>
+            <FollowButton className="inline-flex items-center justify-center rounded-full border border-[#1877f2]/80 bg-[#1877f2] px-5 py-2.5 text-base font-semibold text-white transition hover:border-[#4e9af7] hover:bg-[#0f66d6] sm:px-6 sm:text-lg" />
             <ContactModal className="rounded-full bg-cyan-400 px-5 py-2.5 text-base font-semibold text-slate-900 transition hover:bg-cyan-300 sm:px-6 sm:text-lg" />
           </div>
         </nav>
