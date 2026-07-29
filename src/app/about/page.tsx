@@ -16,7 +16,7 @@ type RedfinListing = {
 const redfinListings: RedfinListing[] = [
   {
     title: "30 Reef #3, Marina del Rey, CA 90292",
-    price: "$2,250,000",
+    price: "$1,095,000",
     specs: "3 bd, 3 ba, 2,000 sq ft",
     image: "/listings/reef/01.png",
     images: [
@@ -47,7 +47,7 @@ const redfinListings: RedfinListing[] = [
   },
   {
     title: "1816 Paseo Del Mar, Palos Verdes Estates, CA 90274",
-    price: "$10,900,000",
+    price: "$9,999,000",
     specs: "6 bd, 9 ba, 11,000 sq ft",
     image: "/listings/paseo/03.png",
     images: [
