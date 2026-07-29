@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import Image from "next/image";
 import FollowButton from "@/components/follow-button";
+import { siteDescription, siteName, siteUrl } from "@/lib/seo";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -15,20 +16,47 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://www.sunandsandrealtor.com"),
+  metadataBase: new URL(siteUrl),
   title: {
-    default: "Sun & Sand Realtor",
-    template: "%s | Sun & Sand Realtor",
+    default: `${siteName} | Southern California Real Estate`,
+    template: `%s | ${siteName}`,
   },
-  description:
-    "Sun & Sand Realtor helps buyers and sellers across coastal Southern California with local market expertise and personalized guidance.",
+  description: siteDescription,
+  alternates: {
+    canonical: "/",
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+      "max-video-preview": -1,
+    },
+  },
   openGraph: {
-    title: "Sun & Sand Realtor",
-    description:
-      "Explore featured homes and connect with Sun & Sand Realtor for buying and selling support.",
-    url: "https://www.sunandsandrealtor.com",
-    siteName: "Sun & Sand Realtor",
+    title: `${siteName} | Southern California Real Estate`,
+    description: siteDescription,
+    url: siteUrl,
+    siteName,
+    images: [
+      {
+        url: "/realtors-photo.png",
+        width: 1024,
+        height: 683,
+        alt: "Sun and Sand Realtor team",
+      },
+    ],
+    locale: "en_US",
     type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: `${siteName} | Southern California Real Estate`,
+    description: siteDescription,
+    images: ["/realtors-photo.png"],
   },
 };
 

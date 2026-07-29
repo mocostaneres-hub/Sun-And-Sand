@@ -1,73 +1,30 @@
 import Image from "next/image";
 import Link from "next/link";
+import type { Metadata } from "next";
 import ListingCarousel from "@/components/listing-carousel";
 import ContactModal from "@/components/contact-modal";
 import FollowButton from "@/components/follow-button";
+import StructuredData from "@/components/structured-data";
+import { redfinListings } from "@/lib/listings";
+import { realEstateJsonLd, siteDescription, siteName, siteUrl } from "@/lib/seo";
 
-type RedfinListing = {
-  title: string;
-  price: string;
-  image: string;
-  redfinUrl: string;
-  images?: string[];
-  specs?: string;
+export const metadata: Metadata = {
+  title: "Southern California Homes for Sale",
+  description: siteDescription,
+  alternates: {
+    canonical: "/",
+  },
+  openGraph: {
+    title: `${siteName} | Southern California Homes for Sale`,
+    description: siteDescription,
+    url: siteUrl,
+  },
 };
-
-const redfinListings: RedfinListing[] = [
-  {
-    title: "30 Reef #3, Marina del Rey, CA 90292",
-    price: "$1,095,000",
-    specs: "3 bd, 3 ba, 2,000 sq ft",
-    image: "/listings/reef/01.png",
-    images: [
-      "/listings/reef/01.png",
-      "/listings/reef/02.png",
-      "/listings/reef/03.png",
-      "/listings/reef/04.png",
-      "/listings/reef/05.png",
-      "/listings/reef/06.png",
-    ],
-    redfinUrl:
-      "https://www.redfin.com/CA/Marina-del-Rey/30-Reef-St-90292/unit-3/home/6782760",
-  },
-  {
-    title: "20906 Almazan, Woodland Hills, CA 91364",
-    price: "$1,275,000",
-    specs: "4 bd, 2.5 bath, 2,801 sq ft",
-    image: "/listings/almazan/01.png",
-    images: [
-      "/listings/almazan/01.png",
-      "/listings/almazan/02.png",
-      "/listings/almazan/03.png",
-      "/listings/almazan/04.png",
-      "/listings/almazan/05.png",
-    ],
-    redfinUrl: "https://www.redfin.com/CA/Woodland-Hills/20906-Almazan-Rd-91364/home/4217236",
-  },
-  {
-    title: "1816 Paseo Del Mar, Palos Verdes Estates, CA 90274",
-    price: "$9,999,000",
-    specs: "6 bd, 9 ba, 11,000 sq ft",
-    image: "/listings/paseo/03.png",
-    images: [
-      "/listings/paseo/03.png",
-      "/listings/paseo/04.png",
-      "/listings/paseo/05.png",
-      "/listings/paseo/06.png",
-      "/listings/paseo/07.png",
-      "/listings/paseo/08.png",
-      "/listings/paseo/09.png",
-      "/listings/paseo/10.png",
-      "/listings/paseo/11.png",
-    ],
-    redfinUrl:
-      "https://www.redfin.com/CA/Palos-Verdes-Estates/1816-Paseo-del-Mar-90274/home/22703092",
-  },
-];
 
 export default function Home() {
   return (
     <main className="bg-slate-950 text-slate-100">
+      <StructuredData data={realEstateJsonLd()} />
       <section className="mx-auto max-w-7xl px-6 py-8 lg:px-8">
         <nav className="flex items-start justify-between gap-4 py-1">
           <div className="shrink-0">

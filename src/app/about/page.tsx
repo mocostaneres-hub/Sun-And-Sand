@@ -1,70 +1,26 @@
 import Image from "next/image";
 import Link from "next/link";
+import type { Metadata } from "next";
 import ContactModal from "@/components/contact-modal";
 import ListingCarousel from "@/components/listing-carousel";
 import FollowButton from "@/components/follow-button";
+import { redfinListings } from "@/lib/listings";
+import { siteName, siteUrl } from "@/lib/seo";
 
-type RedfinListing = {
-  title: string;
-  price: string;
-  image: string;
-  redfinUrl: string;
-  images?: string[];
-  specs?: string;
+export const metadata: Metadata = {
+  title: "About Dave Orenstein and Ricky Otterstrom",
+  description:
+    "Meet Sun & Sand Realtor agents Dave Orenstein and Ricky Otterstrom, Southern California locals with deep real estate experience.",
+  alternates: {
+    canonical: "/about",
+  },
+  openGraph: {
+    title: `About ${siteName}`,
+    description:
+      "Meet Dave Orenstein and Ricky Otterstrom, Southern California real estate advocates for buyers, sellers, and investors.",
+    url: `${siteUrl}/about`,
+  },
 };
-
-const redfinListings: RedfinListing[] = [
-  {
-    title: "30 Reef #3, Marina del Rey, CA 90292",
-    price: "$1,095,000",
-    specs: "3 bd, 3 ba, 2,000 sq ft",
-    image: "/listings/reef/01.png",
-    images: [
-      "/listings/reef/01.png",
-      "/listings/reef/02.png",
-      "/listings/reef/03.png",
-      "/listings/reef/04.png",
-      "/listings/reef/05.png",
-      "/listings/reef/06.png",
-    ],
-    redfinUrl:
-      "https://www.redfin.com/CA/Marina-del-Rey/30-Reef-St-90292/unit-3/home/6782760",
-  },
-  {
-    title: "20906 Almazan, Woodland Hills, CA 91364",
-    price: "$1,275,000",
-    specs: "4 bd, 2.5 bath, 2,801 sq ft",
-    image: "/listings/almazan/01.png",
-    images: [
-      "/listings/almazan/01.png",
-      "/listings/almazan/02.png",
-      "/listings/almazan/03.png",
-      "/listings/almazan/04.png",
-      "/listings/almazan/05.png",
-    ],
-    redfinUrl:
-      "https://www.redfin.com/CA/Woodland-Hills/20906-Almazan-Rd-91364/home/4217236",
-  },
-  {
-    title: "1816 Paseo Del Mar, Palos Verdes Estates, CA 90274",
-    price: "$9,999,000",
-    specs: "6 bd, 9 ba, 11,000 sq ft",
-    image: "/listings/paseo/03.png",
-    images: [
-      "/listings/paseo/03.png",
-      "/listings/paseo/04.png",
-      "/listings/paseo/05.png",
-      "/listings/paseo/06.png",
-      "/listings/paseo/07.png",
-      "/listings/paseo/08.png",
-      "/listings/paseo/09.png",
-      "/listings/paseo/10.png",
-      "/listings/paseo/11.png",
-    ],
-    redfinUrl:
-      "https://www.redfin.com/CA/Palos-Verdes-Estates/1816-Paseo-del-Mar-90274/home/22703092",
-  },
-];
 
 export default function AboutPage() {
   return (

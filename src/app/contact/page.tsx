@@ -1,7 +1,24 @@
 import Image from "next/image";
 import Link from "next/link";
+import type { Metadata } from "next";
 import ContactPageForm from "@/components/contact-page-form";
 import FollowButton from "@/components/follow-button";
+import { siteName, siteUrl } from "@/lib/seo";
+
+export const metadata: Metadata = {
+  title: "Contact",
+  description:
+    "Contact Sun & Sand Realtor for buyer representation, seller representation, relocation, and investment property guidance in Southern California.",
+  alternates: {
+    canonical: "/contact",
+  },
+  openGraph: {
+    title: `Contact ${siteName}`,
+    description:
+      "Reach Dave Orenstein and Ricky Otterstrom for Southern California real estate guidance.",
+    url: `${siteUrl}/contact`,
+  },
+};
 
 export default function ContactPage() {
   return (
