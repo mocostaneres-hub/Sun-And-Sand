@@ -96,7 +96,11 @@ export default function Home() {
                 className="overflow-hidden rounded-2xl border border-slate-700 bg-slate-950/80"
               >
                 {listing.images ? (
-                  <ListingCarousel images={listing.images} alt={listing.title} />
+                  <ListingCarousel
+                    images={listing.images}
+                    alt={listing.title}
+                    sold={listing.sold}
+                  />
                 ) : (
                   <Image
                     src={listing.image}

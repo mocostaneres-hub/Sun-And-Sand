@@ -8,6 +8,7 @@ export type RedfinListing = {
   floorSize: number;
   image: string;
   images: string[];
+  sold?: boolean;
   redfinUrl: string;
   address: {
     streetAddress: string;
@@ -91,6 +92,7 @@ export const redfinListings: RedfinListing[] = [
       "/listings/paseo/10.png",
       "/listings/paseo/11.png",
     ],
+    sold: true,
     redfinUrl:
       "https://www.redfin.com/CA/Palos-Verdes-Estates/1816-Paseo-del-Mar-90274/home/22703092",
     address: {
